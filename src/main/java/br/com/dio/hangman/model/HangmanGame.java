@@ -19,11 +19,12 @@ public class HangmanGame {
     private final List<HangmanChar> hangmanPaths;
     private final List<HangmanChar> characters;
     private final List<Character> failAttempts = new ArrayList<>();
+    private final String tip;
 
     private String hangman;
     private HangmanGameStatus hangmanGameStatus;
 
-    public HangmanGame(final List<HangmanChar> characters) {
+    public HangmanGame(final List<HangmanChar> characters, final String tip) {
         var whiteSpaces = " ".repeat(characters.size());
         var characterSpace = "-".repeat(characters.size());
         this.lineSize = HANGMAN_INITIAL_LINE_LENGTH_WITH_LINE_SEPARATOR + whiteSpaces.length();
@@ -32,13 +33,14 @@ public class HangmanGame {
         buildHangmanDesgin(whiteSpaces, characterSpace);
         this.characters = setCharacterSpacePositionInGame(characters, whiteSpaces.length());
         this.hangmanInitialSize = hangman.length();
+        this.tip = tip;
 
     }
 
     public void inputCharacter(final char character) {
         String message;
         if (this.hangmanGameStatus != PENDING) {
-            if (this.hangmanGameStatus == WIN) message = "Parabens voce ganhou!";
+            if (this.hangmanGameStatus == WIN) message = "Parabens, voce ganhou!";
             else message = "Você perdeu, tente novamente! ";
             throw new GameIsFinishedException(message);
         }
@@ -125,5 +127,9 @@ public class HangmanGame {
 
     public HangmanGameStatus getHangmanGameStatus() {
         return hangmanGameStatus;
+    }
+
+    public String getTip() {
+        return tip;
     }
 }
