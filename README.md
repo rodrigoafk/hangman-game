@@ -20,7 +20,3 @@ Um jogo da forca que roda no terminal. O jogador deve adivinhar a palavra com ba
 
 ---
 
-
-```bash
-javac Main.java
-java Main
